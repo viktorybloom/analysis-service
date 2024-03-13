@@ -1,7 +1,6 @@
-fuzzywuzzy==0.18.0
-jupytext==1.14.5
-psycopg2-binary==2.9.5
-py2neo==2021.2.3
-spacy==3.5.1
-openai==0.27.4
-openai_secret_manager==0.0.2
+fuzzywuzzy
+jupytext
+psycopg2-binary
+py2neo
+spacy
+openai

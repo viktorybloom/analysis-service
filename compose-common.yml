@@ -41,6 +41,8 @@ services:
     build:
       context: .
       dockerfile: docker/jupyter.Dockerfile
+    ports:
+      - "8888:8888"
     links:
       - neo4j
       - postgresdb
