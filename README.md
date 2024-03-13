@@ -1,4 +1,4 @@
-# flask data science environment
+# data environment
 
 ### Make commands
 Run `make help` to view available actions to interact with environment.
