@@ -3,7 +3,8 @@
 ### Make commands
 Run `make help` to view available actions to interact with environment.
 
-`make ...` \n
+`make ...` 
+
 `clean`                          Stop and delete all containers and volumes.
 
 `init-jupyter`                   Build jupyter
