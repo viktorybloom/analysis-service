@@ -1,20 +1,26 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8
+FROM python:3.12
 
-# Set the working directory to /app
-WORKDIR /app
+LABEL maintainer="viktorsulejic@gmail.com"
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+RUN apt update && \
+  apt install -y \ 
+    dumb-init \
+    postgres-client \ 
+    nginx \ 
+    supervisor \ 
+    libjemalloc2 && \ 
+  apt install -f -y && \ 
+  apt clean && rm -r /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
+# Pip install
+ADD ./application/requirements.txt /opt/flask/
+Run pip3 install --verbose --exists-action=s --no-cache-dir -r /opt/flask/requirements.txt
 
-# Define environment variable
-ENV NAME World
+# container settings
+VOLUME ["/opt/flask/app]
+WORKDIR /opt/flask/app
 
 # Run app.py when the container launches
 CMD ["flask", "run"]
