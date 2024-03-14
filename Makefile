@@ -74,6 +74,13 @@ stop: ## Stop containers
 kill: ## Kill all containers
 	docker compose --file compose-common.yml kill
 
+destroy: ## Complete wipe of docker
+	docker stop $$(docker ps -a -q); \
+	docker rm $$(docker ps -a -q); \
+	docker rmi $$(docker images -q); \
+	docker volume rm $$(docker volume ls -q); \
+	docker network rm $$(docker network ls -q)
+
 
 test: ## Run unit tests (Note: not yet implemented here). Requires that containers are running
 	docker compose exec db bash -c "sudo -u postgres psql -c 'ALTER USER user CREATEDB;'"

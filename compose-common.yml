@@ -3,6 +3,8 @@ version: '3.8'
 services:
   postgresdb:
     image: postgres:16
+    ports:
+      - "5433:5432"
     environment:
       - POSTGRES_DB=alpine
       - POSTGRES_USER=alpine
@@ -32,10 +34,10 @@ services:
     build:
       context: .
       dockerfile: docker/go-service.Dockerfile
-    links:
-      - postgresdb
     environment:
       - DATABASE_URL=postgresql://alpine:password@postgresdb:5432/alpine
+    depends_on:
+      - postgresdb
 
   jupyter:
     build:
@@ -43,10 +45,6 @@ services:
       dockerfile: docker/jupyter.Dockerfile
     ports:
       - "8888:8888"
-    links:
-      - neo4j
-      - postgresdb
-    user: root
     environment:
       - NB_UID=${NB_UID}
       - NB_GID=${NB_GID}
@@ -56,6 +54,9 @@ services:
     volumes:
       - ./jupyter:/home/jovyan/
       - ./jupyter/requirements.txt:/tmp/requirements.txt
+    depends_on:
+      - postgresdb
+      - neo4j
 
 volumes:
   neo4j-plugins:
