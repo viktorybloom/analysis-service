@@ -3,7 +3,7 @@
 ### Make commands
 Run `make help` to view available actions to interact with environment.
 
-`make ...` 
+`make ...`
 
 `clean`                          Stop and delete all containers and volumes.
 
@@ -20,3 +20,5 @@ Run `make help` to view available actions to interact with environment.
 `run`                            Normal command for running a dev environment
 
 `stop`                           Stop containers
+
+`destroy`                        Complete wipe of docker
