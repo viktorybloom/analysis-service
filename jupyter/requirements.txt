@@ -1,3 +1,5 @@
+pandas
+scipy
 fuzzywuzzy
 jupytext
 psycopg2-binary

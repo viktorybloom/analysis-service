@@ -43,7 +43,7 @@ geckodriver.log
 *.iml
 
 # for Jupytext ignoring ipynb files
-*.ipynb
+#*.ipynb
 .bash_history
 .cache
 .ipynb_checkpoints
