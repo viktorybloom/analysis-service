@@ -1,3 +1,0 @@
-[submodule "jup"]
-	path = jup
-	url = git@github.com:viktorybloom/jupyter.git
