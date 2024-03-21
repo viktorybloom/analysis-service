@@ -15,13 +15,13 @@ RUN apt-get update && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Pip Install
-ADD ./application/requirements.txt /opt/flask/
-RUN pip3 install --verbose --exists-action=s --no-cache-dir -r /opt/flask/requirements.txt
+ADD ./application/requirements.txt /opt/django/
+RUN pip3 install --verbose --exists-action=s --no-cache-dir -r /opt/django/requirements.txt
 
 # Set the working directory in the container
-VOLUME ["/opt/flask/app"]
+VOLUME ["/opt/django/app"]
 #EXPOSE 80
-WORKDIR /opt/flask/app
+WORKDIR /opt/django/app
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 

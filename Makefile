@@ -27,37 +27,37 @@ run: ## Normal command for running a dev environment.
 	@ echo "${NB_UID}:${NB_GID}"
 	export NB_UID=${NB_UID}; \
 	export NB_GID=${NB_GID}; \
-	docker compose --file compose-common.yml kill; \
-	docker compose --file compose-common.yml rm -f; \
-	docker compose --file compose-common.yml up --build -d; \
-	docker compose --file compose-common.yml logs --tail 10 --follow;
+	docker compose --file docker-compose.yml kill; \
+	docker compose --file docker-compose.yml rm -f; \
+	docker compose --file docker-compose.yml up --build -d; \
+	docker compose --file docker-compose.yml logs --tail 10 --follow;
 
 
 init-jupyter: ## Build jupyter
 	@ echo "${NB_UID}:${NB_GID}"
 	export NB_UID=${NB_UID}; \
 	export NB_GID=${NB_GID}; \
-	docker compose --file compose-common.yml up --force-recreate --build jupyter
+	docker compose --file docker-compose.yml up --force-recreate --build jupyter
 
 
 run-jupyter: ## Run jupyter service
 	@ echo "${NB_UID}:${NB_GID}"
 	export NB_UID=${NB_UID}; \
 	export NB_GID=${NB_GID}; \
-	docker compose --file compose-common.yml kill jupyter; \
-	docker compose --file compose-common.yml rm -f jupyter; \
-	docker compose --file compose-common.yml up --build -d jupyter; \
-	docker compose --file compose-common.yml logs --tail 10 --follow jupyter;
+	docker compose --file docker-compose.yml kill jupyter; \
+	docker compose --file docker-compose.yml rm -f jupyter; \
+	docker compose --file docker-compose.yml up --build -d jupyter; \
+	docker compose --file docker-compose.yml logs --tail 10 --follow jupyter;
 
 	@echo ""
 	@echo "Run Jupyter Notebook lab by connecting to http://localhost:8888"
 
 
 run-neo4j: ## Run Neo4j service
-	docker compose --file compose-common.yml kill neo4j; \
-	docker compose --file compose-common.yml rm -f neo4j; \
-	docker compose --file compose-common.yml up --build -d neo4j; \
-	docker compose --file compose-common.yml logs --tail 10 --follow neo4j;
+	docker compose --file docker-compose.yml kill neo4j; \
+	docker compose --file docker-compose.yml rm -f neo4j; \
+	docker compose --file docker-compose.yml up --build -d neo4j; \
+	docker compose --file docker-compose.yml logs --tail 10 --follow neo4j;
 
 	@echo ""
 	@echo "Connect to Neo4j by navigating to http://localhost:7474"
@@ -68,11 +68,11 @@ logs: ## Show logs for all running containers
 
 
 stop: ## Stop containers
-	docker compose --file compose-common.yml stop
+	docker compose --file docker-compose.yml stop
 
 
 kill: ## Kill all containers
-	docker compose --file compose-common.yml kill
+	docker compose --file docker-compose.yml kill
 
 destroy: ## Complete wipe of docker
 	docker stop $$(docker ps -a -q); \
