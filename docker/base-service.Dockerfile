@@ -1,8 +1,8 @@
-# Start from the base Python image
-FROM python:3.12
+FROM golang:1.2
 
 LABEL maintainer="viktorsulejic@gmail.com"
 
+# Install necessary dependencies
 RUN apt-get update && \
   apt-get install -y \
     dumb-init \
@@ -14,17 +14,15 @@ RUN apt-get update && \
   apt-get install -f -y && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Pip Install
-ADD ./application/requirements.txt /opt/django/
-RUN pip3 install --verbose --exists-action=s --no-cache-dir -r /opt/django/requirements.txt
+ADD ../application/requirements.txt /opt/go/app
+WORKDIR opt/go/app
 
-# Set the working directory in the container
-VOLUME ["/opt/django/app"]
-#EXPOSE 80
-WORKDIR /opt/django/app
+COPY . .
+
+#RUN go build -o main .
+
+# EXPOSE 8080
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-# Specify the command to run your Flask application
-CMD ["python"]
-
+CMD ["./main"]
