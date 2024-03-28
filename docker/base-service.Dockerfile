@@ -1,4 +1,4 @@
-FROM golang:1.2
+FROM python:3.12
 
 LABEL maintainer="viktorsulejic@gmail.com"
 
@@ -14,15 +14,15 @@ RUN apt-get update && \
   apt-get install -f -y && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD ../application/requirements.txt /opt/go/app
-WORKDIR opt/go/app
 
-COPY . .
+WORKDIR /app
 
-#RUN go build -o main .
+COPY ./application/requirements.txt /app/
+RUN pip install --verbose --no-cache-dir -r requirements.txt
 
-# EXPOSE 8080
+COPY ./application /app/
+
+EXPOSE 80
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-
-CMD ["./main"]
+CMD ["python", "app.py"]

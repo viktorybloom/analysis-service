@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   postgresdb:
@@ -11,6 +11,14 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "8080:80"
 
   neo4j:
     image: neo4j:latest
@@ -48,6 +56,29 @@ services:
     depends_on:
       - postgresdb
       - neo4j
+
+ 
+  web:
+    build:
+      context: .
+      dockerfile: docker/base-service.Dockerfile
+    ports:
+      - "80:80" 
+    environment:    
+      - FLASK_ENV=development
+    depends_on:
+      - postgresdb
+      - neo4j
+      - jupyter
+
+  svelte:
+    build:
+      context: .
+      dockerfile: docker/svelte.Dockerfile
+    ports: 
+      - "5000:5000"
+    volumes:
+      - .:/app
 
 volumes:
   neo4j-plugins:

@@ -1,5 +1,5 @@
 # Start from a core stack version
-FROM jupyter/datascience-notebook:2023-02-28
+FROM jupyter/all-spark-notebook:x86_64-ubuntu-22.04
 # Install from the requirements.txt file
 COPY --chown=${NB_UID}:${NB_GID} ./jupyter/requirements.txt /tmp/
 RUN pip install --no-cache-dir --requirement /tmp/requirements.txt && \
