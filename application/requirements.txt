@@ -18,3 +18,4 @@ Flask-RESTx             # An extension for Flask that adds support for building 
 Flask-JWT               # Another Flask extension for JSON Web Token (JWT) support.
 Flask-RESTPlus          # An extension for Flask that adds support for building RESTful APIs with additional features and improved Swagger documentation.
 Flask-Session           # Adds session support to Flask applications.
+Flask-htmx              # Add htmx support

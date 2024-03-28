@@ -1,0 +1,21 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+    <h1>Welcome to the Basic Web App</h1>
+    <ul>
+        <li><a href="/postgres" hx-get="/postgres">PostgreSQL Service</a></li>
+        <li><a href="/neo4j" hx-get="/neo4j">Neo4j Service</a></li>
+        <li><a href="/jupyter" hx-get="/jupyter">Jupyter Service</a></li>
+        <li><a href="/manage_database" hx-get="/manage_database">Manage Database</a></li>
+    </ul>
+    <div id="content" hx-target="#content" hx-swap="outerHTML"></div>
+</body>
+</html>
+
