@@ -12,14 +12,6 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=root
-    ports:
-      - "8080:80"
-
   neo4j:
     image: neo4j:latest
     ports:
@@ -58,28 +50,28 @@ services:
       - neo4j
 
  
-  web:
+  base-service:
     build:
       context: .
       dockerfile: docker/base-service.Dockerfile
     ports:
-      - "80:80" 
-    environment:    
-      - FLASK_ENV=development
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=myproject.settings.dev
+      - DATABASE_URL=postgresql://alpine:password@postgresdb:5432/alpine
     depends_on:
       - postgresdb
       - neo4j
       - jupyter
-
+  
   nginx:
-    image: nginx:1.25-alpine
+    image: nginx:latest
     ports:
-      - 80:80
+      - "80:80"
     volumes:
-      - docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - static_volume:/app/app/static:ro
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
-      - web
+      - base-service
     networks:
       - nginx_network
 

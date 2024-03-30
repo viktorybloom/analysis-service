@@ -14,6 +14,7 @@ RUN apt-get update && \
   apt-get install -f -y && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+COPY ./docker/nginx/ /etc/nginx/
 
 WORKDIR /app
 
@@ -25,4 +26,4 @@ COPY ./application /app/
 EXPOSE 80
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["python", "app.py"]
+CMD ["python", "app.py", "&&", "nginx", "-g", "daemon off;"]
