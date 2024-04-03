@@ -19,11 +19,11 @@ COPY ./docker/nginx/ /etc/nginx/
 WORKDIR /app
 
 COPY ./application/requirements.txt /app/
-RUN pip install --verbose --no-cache-dir -r requirements.txt
+RUN pip install --verbose --exists-action=s --no-cache-dir -r requirements.txt
 
 COPY ./application /app/
 
 EXPOSE 80
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["python", "app.py", "&&", "nginx", "-g", "daemon off;"]
+CMD ["python", "manage.py", "&&", "nginx", "-g", "daemon off;"]

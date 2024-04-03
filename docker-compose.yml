@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  postgresdb:
+  db:
     image: postgres:16
     ports:
       - "5433:5432"
@@ -39,14 +39,14 @@ services:
     environment:
       - NB_UID=${NB_UID}
       - NB_GID=${NB_GID}
-      - DATABASE_URL=postgresql://alpine:password@postgresdb:5432/alpine
+      - DATABASE_URL=postgresql://alpine:password@db:5432/alpine
       - JUPYTER_ENABLE_LAB=yes
     command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
     volumes:
       - ./jupyter:/home/jovyan/
       - ./jupyter/requirements.txt:/tmp/requirements.txt
     depends_on:
-      - postgresdb
+      - db
       - neo4j
 
  
@@ -57,10 +57,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DJANGO_SETTINGS_MODULE=myproject.settings.dev
-      - DATABASE_URL=postgresql://alpine:password@postgresdb:5432/alpine
+      - DJANGO_SETTINGS_MODULE=service.settings
+      - DATABASE_URL=postgresql://alpine:password@db:5432/alpine
+    volumes:
+      - ./application:/app/
     depends_on:
-      - postgresdb
+      - db
       - neo4j
       - jupyter
   
@@ -86,4 +88,5 @@ volumes:
     driver: local
   postgres-data:
     driver: local
-
+  django-media:
+    driver: local
