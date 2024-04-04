@@ -82,12 +82,12 @@ destroy: ## Complete wipe of docker
 	docker network rm $$(docker network ls -q)
 
 
-test: ## Run unit tests (Note: not yet implemented here). Requires that containers are running
+#test: ## Run unit tests (Note: not yet implemented here). Requires that containers are running
 	docker compose exec db bash -c "sudo -u postgres psql -c 'ALTER USER user CREATEDB;'"
 	docker compose exec web python3 manage.py test --keepdb
 
 
-install-pre-commit: ## Install the pre-commit tool for git
+#install-pre-commit: ## Install the pre-commit tool for git
 	pip3 install pre-commit
 	pre-commit install
 	@echo
