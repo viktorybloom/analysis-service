@@ -54,7 +54,7 @@ services:
       context: .
       dockerfile: docker/base-service.Dockerfile
     ports:
-      - "8000:8000"
+      - "5000:5000"
     environment:
       - DATABASE_URL=postgresql://alpine:password@db:5432/alpine
       - FLASK_ENV=development

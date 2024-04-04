@@ -18,7 +18,7 @@ RUN pip install --verbose --exists-action=s --no-cache-dir -r requirements.txt
 
 COPY ./application /app/
 
-EXPOSE 80
+EXPOSE 5000
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["python", "manage.py"]
