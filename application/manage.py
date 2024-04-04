@@ -1,7 +1,7 @@
-import Flask
+from flask import Flask
 
 HOST = '0.0.0.0'
-PORT = 8081
+PORT = 8080
 
 app = Flask(__name__)
 
