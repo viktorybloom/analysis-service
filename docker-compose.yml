@@ -6,6 +6,7 @@ services:
     ports:
       - "5433:5432"
     environment:
+      - PG_INIT
       - POSTGRES_DB=alpine
       - POSTGRES_USER=alpine
       - POSTGRES_PASSWORD=password
@@ -62,7 +63,7 @@ services:
       - ./application:/app/
     depends_on:
       - db
-      - neo4j
+      - neo4j 
       - jupyter
   
 volumes:

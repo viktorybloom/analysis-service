@@ -16,7 +16,7 @@ WORKDIR /app
 COPY ./application/requirements.txt /app/
 RUN pip install --verbose --exists-action=s --no-cache-dir -r requirements.txt
 
-COPY ./application /app/
+COPY ./application/* /app/
 
 EXPOSE 5000
 
