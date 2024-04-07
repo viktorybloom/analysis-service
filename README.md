@@ -1,4 +1,6 @@
 ### Services available WIP currently 127.0.0.1
+service template - http://127.0.0.1:5000/
+
 jupyter - http://127.0.0.1:8888/
 
 neo4j - http://127.0.0.1:7474/
