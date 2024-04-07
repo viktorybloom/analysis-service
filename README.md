@@ -1,7 +1,7 @@
-### Services available WIP currently localhost
-jupyter - http://localhost:8888/
+### Services available WIP currently 127.0.0.1
+jupyter - http://127.0.0.1:8888/
 
-neo4j - http://localhost:7474/
+neo4j - http://127.0.0.1:7474/
 
 ### Make commands
 Run `make help` to view available actions to interact with environment.
