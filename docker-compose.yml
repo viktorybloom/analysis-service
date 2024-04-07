@@ -59,7 +59,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://alpine:password@db:5432/alpine
       - FLASK_ENV=development
-      - FLASK_DEBUG=1
+        #- FLASK_DEBUG=1
     volumes:
       - ./application:/app/
     depends_on:
